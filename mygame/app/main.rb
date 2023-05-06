@@ -10,6 +10,7 @@ def tick args
       next if pixel == 0
 
       $map.pixels.each_with_index do |map_pixel, map_index|
+        next if map_pixel == 0
         v = (map_index / $map.w).to_i
         h = map_index % $map.w
         
