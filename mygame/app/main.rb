@@ -9,18 +9,17 @@ def tick args
     $animation.pixels.each_with_index do |pixel, i|
       next if pixel == 0
 
-      $map.pixels.each_with_index do |map_pixel, map_index|
-        next if map_pixel == 0
-        v = (map_index / $map.w).to_i
-        h = map_index % $map.w
-        
-        if map_pixel == pixel
-          output_x = (i / $animation.w).to_i
-          output_y = i % $animation.w
+      map_index = $map.pixels.index(pixel)
 
-          args.render_target(:render).sprites << {x: output_x, y: output_y, w: 1, h: 1, source_x: v, source_y: h, source_w: 1, source_h: 1, path: 'sprites/char/texture.png'}
-        end
-      end
+      next if map_index == nil
+
+      v = (map_index / $map.w).to_i
+      h = map_index % $map.w
+      
+      output_x = (i / $animation.w).to_i
+      output_y = i % $animation.w
+
+      args.render_target(:render).sprites << {x: output_x, y: output_y, w: 1, h: 1, source_x: v, source_y: h, source_w: 1, source_h: 1, path: 'sprites/char/texture.png'}
     end
   end
 
